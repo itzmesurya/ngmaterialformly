@@ -1,0 +1,36 @@
+{
+  "name": "ngmaterialformly",
+  "description": "POC with Angular + Material + Formly",
+  "main": "src/server/app.js",
+  "authors": [
+    "Surya"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "angular",
+    "material",
+    "formly"
+  ],
+  "homepage": "https://github.com/itzmesurya/ngmaterialformly",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/client/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-formly-material": "^0.14.3",
+    "bootstrap": "^3.3.7"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.min.css",
+        "less/bootstrap.less",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+}
