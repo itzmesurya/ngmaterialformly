@@ -1,0 +1,10 @@
+<md-autocomplete ng-disabled="to.isDisabled" md-no-cache="to.noCache" md-selected-item="to.selectedItem" md-search-text-change="to.searchTextChange(vdc.searchText)" md-search-text="to.searchText" md-selected-item-change="to.selectedItemChange(item)" md-items="item in to.querySearch(to.searchText)"
+    md-item-text="item.display" md-min-length="0" placeholder="{{to.placeHolder}}">
+    <md-item-template>
+        <span md-highlight-text="to.searchText" md-highlight-flags="^i">{{item.display}}</span>
+    </md-item-template>
+    <md-not-found>
+        No states matching "{{vdc.searchText}}" were found.
+        <a ng-click="to.newState(vdc.searchText)">Create a new one!</a>
+    </md-not-found>
+</md-autocomplete>
