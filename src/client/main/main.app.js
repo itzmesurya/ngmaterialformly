@@ -41,12 +41,14 @@
             }
         });
 
+        // md-autocomplete
         formlyConfigProvider.setType({
             name: 'md-autocomplete',
             template: '<md-autocomplete \
                         ng-disabled="to.isDisabled" \
                         md-no-cache="to.noCache" \
-                        md-selected-item="to.selectedItem" \
+                        md-floating-label = "{{to.label}}"\
+                        md-selected-item="model[options.key]" \
                         md-search-text-change="to.searchTextChange(vdc.searchText)" \
                         md-search-text="to.searchText" \
                         md-selected-item-change="to.selectedItemChange(item)" \
@@ -68,6 +70,16 @@
                 var t = 0;
             }
         });
+
+        // md-checkbox
+        formlyConfigProvider.setType({
+            name: 'md-checkbox',
+            template: '<md-checkbox ng-model="model[options.key]" ng-class="to.class"\>\
+                        {{to.label}}\
+                        </md-checkbox>'
+        });
+
+
     });
 
 })();

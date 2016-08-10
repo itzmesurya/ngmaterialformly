@@ -6,8 +6,8 @@
         .module('demo')
         .controller('demoController', demoController);
 
-    demoController.$inject = ['$scope', '$log'];
-    function demoController($scope, $log) {
+    demoController.$inject = ['$scope', '$log', '$q', '$timeout'];
+    function demoController($scope, $log, $q, $timeout) {
         activate();
         var dc = this;
         dc.title = 'awesome title';
@@ -20,7 +20,7 @@
         dc.model = {
             "title": "Gonzales weds York",
             "author": "Hayes Carney",
-            "genre": "romedy",
+            "genre": "Romedy",
             "read": true
         }
 
@@ -32,7 +32,7 @@
         // md-autocomplete templateOptions
         dc.genres = loadAll();
         dc.querySearch = querySearch;
-
+        dc.simulateQuery = true;
         ////////////////
         function activate() {
             console.log('demoController activated')
@@ -90,7 +90,7 @@
                 templateOptions: {
                     label: 'Title',
                     req: true,
-                    maxlength: 3
+                    maxlength: 56
                 }
             },
             {
@@ -110,7 +110,13 @@
                     placeHolder: 'What is Genre?'
                 }
             },
-
+            {
+                key: 'read',
+                type: 'md-checkbox',
+                templateOptions: {
+                    class: 'md-primary'
+                }
+            }
         ];
 
 
