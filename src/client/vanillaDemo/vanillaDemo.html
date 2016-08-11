@@ -23,5 +23,27 @@
         <md-checkbox ng-model="vdc.simulateQuery">Simulate query for results?</md-checkbox>
         <md-checkbox ng-model="vdc.noCache">Disable caching of queries?</md-checkbox>
         <md-checkbox ng-model="vdc.isDisabled">Disable the input?</md-checkbox>
+        </br>
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <md-chips-select ng-model="vdc.myItems" select-items="vdc.sItems" main-title="name"></md-chips-select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h3><span>You have selected: </span></h3>
+                    </div>
+                </md-toolbar>
+                <md-content class="md-padding" style="background-color:#e6f2ff;">
+                    <pre>{{vdc.myItems | json}} </pre>
+                </md-content>
+            </div>
+        </div>
+        <div class="row" style="margin-top:60px;">
+            <div>
+                <span>Where have you been: {{selectedCoutries}} </span>
+                <md-chips-select ng-model="selectedCoutries" select-items="countiesList" main-title="country id"></md-chips-select>
+            </div>
+        </div>
     </md-content>
 </div>

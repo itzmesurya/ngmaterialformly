@@ -6,6 +6,7 @@
         'ngRoute',
         'ngMaterial',
         'formly',
+        'md.chips.select',
 
         /*Custom modules */
         'directives',

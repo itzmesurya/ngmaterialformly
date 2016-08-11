@@ -5,7 +5,7 @@
         .module('vanilla.demo')
         .controller('vanillaDemoController', vanillaDemoController);
 
-    vanillaDemoController.$inject = ['$log', '$q','$timeout'];
+    vanillaDemoController.$inject = ['$log', '$q', '$timeout'];
     function vanillaDemoController($log, $q) {
         var vdc = this;
 
@@ -77,5 +77,30 @@
             };
 
         }
+
+        //// Multi-Select code
+
+        vdc.sItems = [
+            {
+                name: "Mini Cooper",
+                id: 0
+            },
+            {
+                name: "Lexus IS250",
+                id: 1
+            }, {
+                name: "Ford F150",
+                id: 2
+            }, {
+                name: "Toyota Prius",
+                id: 3
+            }, {
+                name: "Porsche 911",
+                id: 4
+            }, {
+                name: "Ferreri 488",
+                id: 5
+            }];
+        vdc.myItems = [vdc.sItems[4], vdc.sItems[5]];
     }
 })();

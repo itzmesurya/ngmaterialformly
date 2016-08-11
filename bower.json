@@ -26,15 +26,20 @@
     "api-check": "^7.5.5",
     "angular-formly": "^8.3.0",
     "bootstrap": "^3.3.7",
-    "angular-material": "^1.0.9"
+    "angular-material": "^1.0.9",
+    "md-chips-select": "^0.0.9"
   },
   "overrides": {
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.min.css",
         "less/bootstrap.less",
-        "dist/js/bootstrap.js"
+        "dist/js/bootstrap.js",
+        "dist/md-chips-select.css"
       ]
     }
+  },
+  "resolutions": {
+    "angular": "^1.5.8"
   }
 }
