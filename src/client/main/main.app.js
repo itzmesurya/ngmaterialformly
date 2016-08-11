@@ -74,9 +74,9 @@
         // md-checkbox
         formlyConfigProvider.setType({
             name: 'md-checkbox',
-            template: '<md-checkbox ng-model="model[options.key]" ng-class="to.class"\>\
+            template: '<md-checkbox md-no-ink="false" ng-change="to.onChange()" ng-model="model[options.key]" ng-class="to.class"\>\
                         {{to.label}}\
-                        </md-checkbox>'
+                       </md-checkbox>'
         });
 
 

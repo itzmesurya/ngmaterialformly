@@ -90,7 +90,7 @@
                 templateOptions: {
                     label: 'Title',
                     req: true,
-                    maxlength: 56
+                    maxlength: 3
                 }
             },
             {
@@ -114,7 +114,11 @@
                 key: 'read',
                 type: 'md-checkbox',
                 templateOptions: {
-                    class: 'md-primary'
+                    label: 'Read?',
+                    class: 'md-primary',
+                    onChange: function () {
+                        $log.info('on change fired');
+                    }
                 }
             }
         ];
