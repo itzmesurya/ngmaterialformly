@@ -6,8 +6,8 @@
         .module('demo')
         .controller('demoController', demoController);
 
-    demoController.$inject = ['$scope', '$log', '$q', '$timeout'];
-    function demoController($scope, $log, $q, $timeout) {
+    demoController.$inject = ['$scope', '$log', '$q', '$timeout', '$resource', 'NgTableParams'];
+    function demoController($scope, $log, $q, $timeout, $resource, NgTableParams) {
         activate();
         var dc = this;
         dc.title = 'awesome title';
@@ -17,11 +17,28 @@
             }
         }
 
+        // $resource for ng-table
+        dc.piggyBankResource = $resource('dummyData/piggyBank.json');
+        dc.piggyBankAccounts = {};
+        getPiggyBankDetails();
+        dc.tableParams = null;
+
+        function getPiggyBankDetails() {
+            var accDetails = dc.piggyBankResource.get(function (response) {
+                dc.piggyBankAccounts = response.data;
+                dc.tableParams = new NgTableParams({}, {
+                    dataset: response.data
+                });
+                dc.model["tableData"] = dc.tableParams;
+            });
+        }
+
         dc.model = {
             "title": "Gonzales weds York",
             "author": "Hayes Carney",
             "genre": "Romedy",
             "read": true,
+            "tableData": dc.tableParams,
             "cars": [
                 {
                     name: "Mini Cooper",
@@ -127,6 +144,8 @@
             }];
         dc.myItems = [dc.sItems[4], dc.sItems[5]];
 
+
+
         dc.formFields = [
             {
                 key: 'title',
@@ -179,11 +198,10 @@
                 }
             },
             {
-                key: 'cars',
-                type: 'md-chips-select',
+                key: 'tableData',
+                type: 'ng-table',
                 templateOptions: {
-                    label: 'Cars',
-                    myItems: dc.myItems
+                    tableParams: dc.tableParams
                 }
             }
         ];

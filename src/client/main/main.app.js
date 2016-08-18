@@ -94,6 +94,26 @@
                     </md-chips-select>'
         });
 
+        formlyConfigProvider.setType({
+            name: 'ng-table',
+            template: ' <table ng-table="model[options.key]" class="table table-bordered">\
+                        <tbody>\
+                            <tr ng-repeat="row in $data">\
+                                <td data-title="\'Name\'" filter="{name: \'text\'}" sortable="\'name\'">{{row.name}}</td>\
+                                <td data-title="\'Age\'" filter="{age: \'number\'}" sortable="\'age\'">{{row.age}}</td>\
+                                <td data-title="\'Balance\'" filter="{balance: \'number\'}" sortable="\'balance\'">{{row.balance}}</td>\
+                                <td></td>\
+                            </tr>\
+                        </tbody>\
+                    </table>',
+            link: function (scope, el, attr) {
+                console.log(scope.to);
+            },
+            controller: function () {
+                var t = 0;
+            }
+        });
+
     });
 
 })();
