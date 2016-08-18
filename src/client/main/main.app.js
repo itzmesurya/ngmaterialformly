@@ -4,9 +4,11 @@
     angular.module('main', [
         /* Vendor modules */
         'ngRoute',
+        'ngResource',
         'ngMaterial',
         'formly',
         'md.chips.select',
+        'ngTable',
 
         /*Custom modules */
         'directives',
@@ -75,11 +77,22 @@
         // md-checkbox
         formlyConfigProvider.setType({
             name: 'md-checkbox',
-            template: '<md-checkbox md-no-ink="false" ng-change="to.onChange()" ng-model="model[options.key]" ng-class="to.class"\>\
+            template: '<md-checkbox md-no-ink="false"\
+                         ng-change="to.onChange()" \
+                         ng-model="model[options.key]"\
+                         ng-class="to.class"\>\
                         {{to.label}}\
                        </md-checkbox>'
         });
 
+        formlyConfigProvider.setType({
+            name: 'md-chips-select',
+            template: '<md-chips-select \
+                    ng-model="model[options.key]" \
+                    select-items="to.selectItems" \
+                    main-title="name">\
+                    </md-chips-select>'
+        });
 
     });
 

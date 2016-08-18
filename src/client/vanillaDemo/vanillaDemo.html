@@ -1,49 +1,95 @@
 <div class="well well-sm">
     This page contains Angular Material demos without Angular-Formly
 </div>
-
-
-<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-
-</div>
-
-<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    <md-content class="md-padding">
-        <md-autocomplete ng-disabled="vdc.isDisabled" md-no-cache="vdc.noCache" md-selected-item="vdc.selectedItem" md-search-text-change="vdc.searchTextChange(vdc.searchText)" md-search-text="vdc.searchText" md-selected-item-change="vdc.selectedItemChange(item)"
-            md-items="item in vdc.querySearch(vdc.searchText)" md-item-text="item.display" md-min-length="0" placeholder="What is your favorite US state?">
-            <md-item-template>
-                <span md-highlight-text="vdc.searchText" md-highlight-flags="^i">{{item.display}}</span>
-            </md-item-template>
-            <md-not-found>
-                No states matching "{{vdc.searchText}}" were found.
-                <a ng-click="vdc.newState(vdc.searchText)">Create a new one!</a>
-            </md-not-found>
-        </md-autocomplete>
-        <br>
-        <md-checkbox ng-model="vdc.simulateQuery">Simulate query for results?</md-checkbox>
-        <md-checkbox ng-model="vdc.noCache">Disable caching of queries?</md-checkbox>
-        <md-checkbox ng-model="vdc.isDisabled">Disable the input?</md-checkbox>
-        </br>
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <md-chips-select ng-model="vdc.myItems" select-items="vdc.sItems" main-title="name"></md-chips-select>
+<md-tabs md-dynamic-height="" md-border-bottom="">
+    <md-tab label="md-chips">
+        <md-content class="md-padding">
+            <h1 class="md-display-2">md-chips</h1>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <md-chips ng-model="vdc.selectedVegetables" md-autocomplete-snap="" md-transform-chip="vdc.transformMdChips($chip)" md-require-match=true>
+                        <md-autocomplete md-selected-item="vdc.selectedVegetableItem" md-search-text="vdc.vegetableSearchText" md-items="item in vdc.querySearchVeggies(vdc.vegetableSearchText)" md-item-text="item.name" placeholder="Search for a vegetable">
+                            <span md-highlight-text="">{{item.name}} :: {{item.type}}</span>
+                        </md-autocomplete>
+                        <md-chip-template>
+                            <span><strong>{{$chip.name}}</strong><em>({{$chip.type}})</em></span>
+                        </md-chip-template>
+                    </md-chips>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                            <h3><span>You have selected: </span></h3>
+                        </div>
+                    </md-toolbar>
+                    <md-content class="md-padding" style="background-color:#e6f2ff;">
+                        <pre>{{vdc.selectedVegetables | json}} </pre>
+                    </md-content>
+                </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <md-toolbar>
-                    <div class="md-toolbar-tools">
-                        <h3><span>You have selected: </span></h3>
-                    </div>
-                </md-toolbar>
-                <md-content class="md-padding" style="background-color:#e6f2ff;">
-                    <pre>{{vdc.myItems | json}} </pre>
+
+        </md-content>
+    </md-tab>
+    <md-tab label="md-chips-select">
+        <md-content class="md-padding">
+            <h1 class="md-display-2">md-chips-select</h1>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <md-chips-select ng-model="vdc.myItems" select-items="vdc.sItems" main-title="name"></md-chips-select>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                            <h3><span>You have selected: </span></h3>
+                        </div>
+                    </md-toolbar>
+                    <md-content class="md-padding" style="background-color:#e6f2ff;">
+                        <pre>{{vdc.myItems | json}} </pre>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+    </md-tab>
+    <md-tab label="ng-table">
+        <md-content class="md-padding">
+            <h1 class="md-display-2">Tab Three</h1>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <table ng-table="vdc.tableParams" class="table table-bordered">
+                        <tbody>
+                            <tr ng-repeat="row in $data">
+                                <td data-title="'Name'" filter="{name: 'text'}" sortable="'name'">{{row.name}}</td>
+                                <td data-title="'Age'" filter="{age: 'number'}" sortable="'age'">{{row.age}}</td>
+                                <td data-title="'Balance'" filter="{balance: 'number'}" sortable="'balance'">{{row.balance}}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </md-content>
+    </md-tab>
+    <md-tab label="md-select">
+        <md-content class="md-padding">
+            <h1 class="md-display-2">md-select</h1>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <md-content class="md-padding">
+                    <md-autocomplete ng-disabled="vdc.isDisabled" md-no-cache="vdc.noCache" md-selected-item="vdc.selectedItem" md-search-text-change="vdc.searchTextChange(vdc.searchText)" md-search-text="vdc.searchText" md-selected-item-change="vdc.selectedItemChange(item)"
+                        md-items="item in vdc.querySearch(vdc.searchText)" md-item-text="item.display" md-min-length="0" placeholder="What is your favorite US state?">
+                        <md-item-template>
+                            <span md-highlight-text="vdc.searchText" md-highlight-flags="^i">{{item.display}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            No states matching "{{vdc.searchText}}" were found.
+                            <a ng-click="vdc.newState(vdc.searchText)">Create a new one!</a>
+                        </md-not-found>
+                    </md-autocomplete>
+                    <br>
+                    <md-checkbox ng-model="vdc.simulateQuery">Simulate query for results?</md-checkbox>
+                    <md-checkbox ng-model="vdc.noCache">Disable caching of queries?</md-checkbox>
+                    <md-checkbox ng-model="vdc.isDisabled">Disable the input?</md-checkbox>
                 </md-content>
             </div>
-        </div>
-        <div class="row" style="margin-top:60px;">
-            <div>
-                <span>Where have you been: {{selectedCoutries}} </span>
-                <md-chips-select ng-model="selectedCoutries" select-items="countiesList" main-title="country id"></md-chips-select>
-            </div>
-        </div>
-    </md-content>
-</div>
+        </md-content>
+    </md-tab>
+</md-tabs>

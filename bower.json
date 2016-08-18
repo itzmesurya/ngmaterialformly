@@ -27,14 +27,22 @@
     "angular-formly": "^8.3.0",
     "bootstrap": "^3.3.7",
     "angular-material": "^1.0.9",
-    "md-chips-select": "^0.0.9"
+    "md-chips-select": "^0.0.9",
+    "bootstrap-table": "^1.11.0",
+    "ng-table": "^1.0.0",
+    "angular-resource": "^1.5.8"
   },
   "overrides": {
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.min.css",
         "less/bootstrap.less",
-        "dist/js/bootstrap.js",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "md-chips-select": {
+      "main": [
+        "dist/md-chips-select.js",
         "dist/md-chips-select.css"
       ]
     }

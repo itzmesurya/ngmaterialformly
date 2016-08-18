@@ -21,7 +21,28 @@
             "title": "Gonzales weds York",
             "author": "Hayes Carney",
             "genre": "Romedy",
-            "read": true
+            "read": true,
+            "cars": [
+                {
+                    name: "Mini Cooper",
+                    id: 0
+                },
+                {
+                    name: "Lexus IS250",
+                    id: 1
+                }, {
+                    name: "Ford F150",
+                    id: 2
+                }, {
+                    name: "Toyota Prius",
+                    id: 3
+                }, {
+                    name: "Porsche 911",
+                    id: 4
+                }, {
+                    name: "Ferreri 488",
+                    id: 5
+                }]
         }
 
 
@@ -83,6 +104,29 @@
             }
         }
 
+        dc.sItems = [
+            {
+                name: "Mini Cooper",
+                id: 0
+            },
+            {
+                name: "Lexus IS250",
+                id: 1
+            }, {
+                name: "Ford F150",
+                id: 2
+            }, {
+                name: "Toyota Prius",
+                id: 3
+            }, {
+                name: "Porsche 911",
+                id: 4
+            }, {
+                name: "Ferreri 488",
+                id: 5
+            }];
+        dc.myItems = [dc.sItems[4], dc.sItems[5]];
+
         dc.formFields = [
             {
                 key: 'title',
@@ -119,6 +163,27 @@
                     onChange: function () {
                         $log.info('on change fired');
                     }
+                }
+            },
+            {
+                type: 'md-checkbox',
+                templateOptions: {
+                    label: 'Simulate $q ?',
+                    class: 'md-primary',
+                    onChange: function () {
+                        dc.simulateQuery = !dc.simulateQuery;
+                    }
+                },
+                modelOptions: {
+                    checked: true
+                }
+            },
+            {
+                key: 'cars',
+                type: 'md-chips-select',
+                templateOptions: {
+                    label: 'Cars',
+                    myItems: dc.myItems
                 }
             }
         ];
