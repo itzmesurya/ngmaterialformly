@@ -6,6 +6,7 @@
         'ngRoute',
         'ngResource',
         'ngMaterial',
+        'ngSanitize',
         'formly',
         'md.chips.select',
         'ngTable',
@@ -40,7 +41,7 @@
             ' ng-maxlength={{options.templateOptions.maxlength}}>' +
             '</md-input-container>',
             link: function (scope, el, attr) {
-                console.log(scope);
+                //console.log(scope);
             }
         });
 
@@ -67,7 +68,7 @@
                         </md-not-found>\
                     </md-autocomplete>',
             link: function (scope, el, attr) {
-                console.log(scope.to);
+                //console.log(scope.to);
             },
             controller: function () {
                 var t = 0;
@@ -94,26 +95,22 @@
                     </md-chips-select>'
         });
 
+        //// ng-table controller 
+        var ngTableController = function ($scope, $compile) {
+            $scope.openDialog = function () {
+                // console.log(value);
+                alert('hiya!');
+            }
+        }
+        ngTableController.$inject = ['$scope', '$compile'];
         formlyConfigProvider.setType({
             name: 'ng-table',
-            template: ' <table ng-table="model[options.key]" class="table table-bordered">\
-                        <tbody>\
-                            <tr ng-repeat="row in $data">\
-                                <td data-title="\'Name\'" filter="{name: \'text\'}" sortable="\'name\'">{{row.name}}</td>\
-                                <td data-title="\'Age\'" filter="{age: \'number\'}" sortable="\'age\'">{{row.age}}</td>\
-                                <td data-title="\'Balance\'" filter="{balance: \'number\'}" sortable="\'balance\'">{{row.balance}}</td>\
-                                <td></td>\
-                            </tr>\
-                        </tbody>\
-                    </table>',
+            templateUrl: 'templates/ng-table.html',
             link: function (scope, el, attr) {
-                console.log(scope.to);
+                // console.log(el.find('tbody')[0]);
             },
-            controller: function () {
-                var t = 0;
-            }
+            controller: ngTableController
         });
-
     });
 
 })();

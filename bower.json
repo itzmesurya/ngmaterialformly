@@ -30,7 +30,8 @@
     "md-chips-select": "^0.0.9",
     "bootstrap-table": "^1.11.0",
     "ng-table": "^1.0.0",
-    "angular-resource": "^1.5.8"
+    "angular-resource": "^1.5.8",
+    "angular-sanitize": "^1.5.8"
   },
   "overrides": {
     "bootstrap": {

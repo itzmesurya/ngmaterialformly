@@ -17,6 +17,17 @@
             controller: navBarController,
             controllerAs: 'nbc',
             link: link,
+            compile: function (element, attributes) {
+
+                return {
+                    pre: function (scope, element, attributes, controller, transcludeFn) {
+                        //console.log('pre');
+                    },
+                    post: function (scope, element, attributes, controller, transcludeFn) {
+                        //console.log('post');
+                    }
+                }
+            },
             restrict: 'AE',
             scope: {
             }
@@ -24,11 +35,12 @@
         return directive;
 
         function link(scope, element, attrs) {
+            //console.log('link');
         }
     }
-    navBarController.$inject = [];
+    navBarController.$inject = ['$element'];
     /* @ngInject */
-    function navBarController() {
+    function navBarController($element) {
 
     }
 })();

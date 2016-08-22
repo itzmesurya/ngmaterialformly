@@ -1,0 +1,10 @@
+<table ng-table-dynamic="model[options.key] with to.cols" class="table table-condensed table-bordered table-striped" disable-filter="false" show-filter="true">
+    <tbody>
+        <tr ng-repeat="row in $data">
+            <td ng-repeat="col in $columns" ng-bind-html="col.getValue(this, row)">{{row[col.field]}}</td>
+            <td ng-if="true">
+                <edit-button ng-click="col.openEditDialog()"></edit-button>
+            </td>
+        </tr>
+    </tbody>
+</table>

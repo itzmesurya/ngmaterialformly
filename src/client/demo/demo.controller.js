@@ -6,8 +6,8 @@
         .module('demo')
         .controller('demoController', demoController);
 
-    demoController.$inject = ['$scope', '$log', '$q', '$timeout', '$resource', 'NgTableParams'];
-    function demoController($scope, $log, $q, $timeout, $resource, NgTableParams) {
+    demoController.$inject = ['$scope', '$log', '$q', '$timeout', '$resource', '$sce', '$compile', '$mdDialog', 'NgTableParams'];
+    function demoController($scope, $log, $q, $timeout, $resource, $sce, $compile, $mdDialog, NgTableParams) {
         activate();
         var dc = this;
         dc.title = 'awesome title';
@@ -144,7 +144,9 @@
             }];
         dc.myItems = [dc.sItems[4], dc.sItems[5]];
 
-
+        dc.editBtnClick = function () {
+            alert('alert Fired!');
+        }
 
         dc.formFields = [
             {
@@ -201,7 +203,57 @@
                 key: 'tableData',
                 type: 'ng-table',
                 templateOptions: {
-                    tableParams: dc.tableParams
+                    tableParams: dc.tableParams,
+                    cols: [
+                        {
+                            'field': 'name',
+                            'title': "Name",
+                            'filter': { 'name': 'text' },
+                            'sortable': 'name',
+                            'getValue': function ($scope, row) {
+                                var value = row[this.field];
+                                var html = '<div align="center"><a href="https://www.google.co.uk/search?q=' + value + '" target="_blank"><em>' + value + '</em></a>';
+                                return $sce.trustAsHtml(html);
+                            }
+                        },
+                        {
+                            'field': 'age',
+                            'title': "Age",
+                            'filter': { 'age': 'number' },
+                            'sortable': 'age',
+                            'getValue': function ($scope, row) {
+                                var value = row[this.field];
+                                var html = '<div align="center"><a href="https://www.google.co.uk/search?q=' + value + '" target="_blank"><em>' + value + '</em></a>';
+                                return $sce.trustAsHtml(html);
+                            }
+                        },
+                        {
+                            'field': 'balance',
+                            'title': "Balance",
+                            'filter': { 'balance': 'number' },
+                            'sortable': 'balance',
+                            'getValue': function ($scope, row) {
+                                var value = row[this.field];
+                                var html = '<div align="center"><a href="https://www.google.co.uk/search?q=' + value + '" target="_blank"><em>' + value + '</em></a>';
+                                return $sce.trustAsHtml(html);
+                            }
+                        }
+                        // ,
+                        // {
+                        //     'field': 'action',
+                        //     'title': 'Action',
+                        //     'getValue': function ($scope, row) {
+                        //         var value = row[this.field];
+                        //         var editBtn = '<div align="center"><button type="button" class="btn btn-default" ng-click="openDialog()" >' +
+                        //             '<span class="glyphicon glyphicon-edit" ></span></button></div>';
+                        //         var res = $sce.trustAsHtml(editBtn);
+                        //         return res;
+                        //     },
+                        //     'openEditDialog': function () {
+                        //         alert('alert fired!');
+                        //     }
+                        // }
+                    ]
                 }
             }
         ];
