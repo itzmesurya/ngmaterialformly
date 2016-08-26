@@ -98,8 +98,11 @@
         });
         /** NG-TABEL STUFF */
         //// ng-table controller 
-        var ngTableController = function ($scope, $compile, $log, $uibModal,NgTableParams) {
-
+        var ngTableController = function ($scope, $compile, $resource, $log, $uibModal, NgTableParams) {
+            /** create resource if needed */
+            $scope.gridResource = null;
+            if ($scope.to.resourceUrl)
+                $scope.gridResource = $resource($scope.to.resourceUrl);
             /** Setting up edit pop-up */
             /** Create $uibModal for editing */
             /* Configuring a ui bootstrap modal pop-up to open when the page loads */
@@ -107,12 +110,16 @@
             $scope.animatonsEnabled = true;
             /** 2. setting the open function with 'size' as a param*/
             $scope.openUibModal = function (data, row, columns, event) {
+                var dialogTitle = '';
+                if (!row)
+                    dialogTitle = 'Add Record'
                 var colDefs = [];
                 /**3. Setting up the data for resolution */
                 var resolveData = {
                     rowData: row,
                     columns: columns,
-                    editFormlyFields: $scope.to.editFormlFields
+                    editFormlyFields: $scope.to.editFormlFields,
+                    dialogTitle: dialogTitle
                 }
 
                 var modalInstance = $uibModal.open({
@@ -133,17 +140,28 @@
 
                 /** setting up the result function */
                 modalInstance.result.then(function (rowData) {
-                    console.log(rowData);
-                    console.log($scope.model.tableData);
-                    /** Data is pushed into the grid in the last record of the same page
-                     * Need to look into it
-                     */
-                    $scope.model.tableData.data.push(rowData);
-
                     /** row is undefined while adding a new row item */
-                    for (var key in row) {
-                        if (row.hasOwnProperty(key)) {
-                            row[key] = rowData[key];
+                    if (!row) {
+                        /** as data is managed in memory array, we need to reload it 
+                         * with new row sitting in it
+                         */
+                        $scope.gridResource.get(function (response) {
+                            $scope.newArray = []
+                            $scope.newArray = response.data;
+                            $scope.newArray.push(rowData);
+                            var dataArray = new NgTableParams({}, {
+                                dataset: $scope.newArray
+                            });
+                            $scope.model[$scope.options.key] = dataArray;
+                            alert('Data has been added to the grid.' +
+                                'Please navigate to the last page, and final record must reflect the' +
+                                ' newly added record');
+                        });
+                    } else {
+                        for (var key in row) {
+                            if (row.hasOwnProperty(key)) {
+                                row[key] = rowData[key];
+                            }
                         }
                     }
                 }, function () {
@@ -156,7 +174,7 @@
             }
 
         }
-        ngTableController.$inject = ['$scope', '$compile', '$log', '$uibModal','NgTableParams'];
+        ngTableController.$inject = ['$scope', '$compile', '$resource', '$log', '$uibModal', 'NgTableParams'];
 
         formlyConfigProvider.setType({
             name: 'ng-table',

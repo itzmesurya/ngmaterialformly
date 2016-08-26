@@ -206,6 +206,7 @@
                 type: 'ng-table',
                 templateOptions: {
                     tableParams: dc.tableParams,
+                    resourceUrl: 'dummyData/piggyBank.json',
                     cols: [
                         {
                             'field': 'name',

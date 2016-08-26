@@ -8,10 +8,15 @@
     ngTableEditUibModalController.$inject = ['$uibModalInstance', '$scope', 'resolveData'];
     function ngTableEditUibModalController($uibModalInstance, $scope, resolveData) {
         var $ctrl = this;
+        $ctrl.dialogTitle = '';
+        if (resolveData.dialogTitle === '') {
+            $ctrl.dialogTitle = 'Edit row ' + resolveData.rowData.index;
+        } else {
+            $ctrl.dialogTitle = resolveData.dialogTitle;
+        }
         $ctrl.model = angular.copy(resolveData.rowData);
         $ctrl.fields = resolveData.editFormlyFields;
         $ctrl.options = {};
-        /** Existing pop-up code - DO NOT TOUCH!!!! */
         $ctrl.rowData = angular.copy(resolveData.rowData);
         $ctrl.rowDataFormatted = [];
         if (resolveData.columns)
