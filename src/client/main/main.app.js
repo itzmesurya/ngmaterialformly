@@ -98,26 +98,21 @@
         });
         /** NG-TABEL STUFF */
         //// ng-table controller 
-        var ngTableController = function ($scope, $compile, $log, $uibModal) {
+        var ngTableController = function ($scope, $compile, $log, $uibModal,NgTableParams) {
 
             /** Setting up edit pop-up */
             /** Create $uibModal for editing */
             /* Configuring a ui bootstrap modal pop-up to open when the page loads */
             /** 1. setting the animation true for the modal*/
             $scope.animatonsEnabled = true;
-            /** 2. some 'items' to be placed in the modal */
-            $scope.modalItems = ['item1', 'item2', 'item3'];
-            /** 3. setting the open function with 'size' as a param*/
-            $scope.openUibModal = function (row, columns, event) {
+            /** 2. setting the open function with 'size' as a param*/
+            $scope.openUibModal = function (data, row, columns, event) {
                 var colDefs = [];
-                columns.forEach(function (column) {
-                    var title = column.title();
-                    colDefs.push({ title: title, field: column.field });
-                });
-
+                /**3. Setting up the data for resolution */
                 var resolveData = {
                     rowData: row,
-                    columns: columns
+                    columns: columns,
+                    editFormlyFields: $scope.to.editFormlFields
                 }
 
                 var modalInstance = $uibModal.open({
@@ -130,7 +125,7 @@
                     /** bind it to the controller objects */
                     controllerAs: 'mc',
                     resolve: {
-                        resolveData : resolveData
+                        resolveData: resolveData
                     }
                 });
 
@@ -138,6 +133,14 @@
 
                 /** setting up the result function */
                 modalInstance.result.then(function (rowData) {
+                    console.log(rowData);
+                    console.log($scope.model.tableData);
+                    /** Data is pushed into the grid in the last record of the same page
+                     * Need to look into it
+                     */
+                    $scope.model.tableData.data.push(rowData);
+
+                    /** row is undefined while adding a new row item */
                     for (var key in row) {
                         if (row.hasOwnProperty(key)) {
                             row[key] = rowData[key];
@@ -148,8 +151,12 @@
                 });
             }
 
+            /** setting up the delete row */
+            $scope.deleteRow = function (rowData) {
+            }
+
         }
-        ngTableController.$inject = ['$scope', '$compile', '$log', '$uibModal'];
+        ngTableController.$inject = ['$scope', '$compile', '$log', '$uibModal','NgTableParams'];
 
         formlyConfigProvider.setType({
             name: 'ng-table',

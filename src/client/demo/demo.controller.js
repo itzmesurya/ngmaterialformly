@@ -147,106 +147,65 @@
             }];
         dc.myItems = [dc.sItems[4], dc.sItems[5]];
 
-        /** Create $uibModal for editing */
-        /** Modal functions start */
-
-        /* Configuring a ui bootstrap modal pop-up to open when the page loads */
-        /** 1. setting the animation true for the modal*/
-        dc.animatonsEnabled = true;
-        /** 2. some 'items' to be placed in the modal */
-        dc.modalItems = ['item1', 'item2', 'item3'];
-        /** 3. setting the open function with 'size' as a param*/
-        dc.openUibModal = function (row, size) {
-            var modalInstance = $uibModal.open({
-                /** setting the animation true */
-                animation: dc.animatonsEnabled,
-                /** setting the templateUrl to an html template file */
-                templateUrl: 'templates/ng-table-edit-uibModal.html',
-                /** assign a controller to the modal pop-up, file: "vanillaDemoPageLoadModal.controller.js" */
-                controller: 'ngTableEditUibModalController',
-                /** bind it to the controller objects */
-                controllerAs: 'mc',
-                /** setting the size of the modal pop-up */
-                size: size,
-                resolve: {
-                    items: function () {
-                        return dc.modalItems;
-                    },
-                    rowData: row
-                }
-            });
-
-            /** setting up the result function */
-            modalInstance.result.then(function (selectedItem) {
-                dc.selectedItem = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        }
-
         /** Modal functions end */
 
         dc.formFields = [
-            {
-                key: 'title',
-                type: 'md-input',
-                templateOptions: {
-                    label: 'Title',
-                    req: true,
-                    maxlength: 3
-                }
-            },
-            {
-                key: 'author',
-                type: 'md-input',
-                templateOptions: {
-                    label: 'Author'
-                }
-            },
-            {
-                key: 'genre',
-                type: 'md-autocomplete',
-                templateOptions: {
-                    label: 'Genre',
-                    querySearch: dc.querySearch,
-                    searchText: '',
-                    placeHolder: 'What is Genre?'
-                }
-            },
-            {
-                key: 'read',
-                type: 'md-checkbox',
-                templateOptions: {
-                    label: 'Read?',
-                    class: 'md-primary',
-                    onChange: function () {
-                        $log.info('on change fired');
-                    }
-                }
-            },
-            {
-                type: 'md-checkbox',
-                templateOptions: {
-                    label: 'Simulate $q ?',
-                    class: 'md-primary',
-                    onChange: function () {
-                        dc.simulateQuery = !dc.simulateQuery;
-                    }
-                },
-                modelOptions: {
-                    checked: true
-                }
-            }
-            ,
+            // {
+            //     key: 'title',
+            //     type: 'md-input',
+            //     templateOptions: {
+            //         label: 'Title',
+            //         req: true,
+            //         maxlength: 3
+            //     }
+            // },
+            // {
+            //     key: 'author',
+            //     type: 'md-input',
+            //     templateOptions: {
+            //         label: 'Author'
+            //     }
+            // },
+            // {
+            //     key: 'genre',
+            //     type: 'md-autocomplete',
+            //     templateOptions: {
+            //         label: 'Genre',
+            //         querySearch: dc.querySearch,
+            //         searchText: '',
+            //         placeHolder: 'What is Genre?'
+            //     }
+            // },
+            // {
+            //     key: 'read',
+            //     type: 'md-checkbox',
+            //     templateOptions: {
+            //         label: 'Read?',
+            //         class: 'md-primary',
+            //         onChange: function () {
+            //             $log.info('on change fired');
+            //         }
+            //     }
+            // },
+            // {
+            //     type: 'md-checkbox',
+            //     templateOptions: {
+            //         label: 'Simulate $q ?',
+            //         class: 'md-primary',
+            //         onChange: function () {
+            //             dc.simulateQuery = !dc.simulateQuery;
+            //         }
+            //     },
+            //     modelOptions: {
+            //         checked: true
+            //     }
+            // }
+            // ,
             {
                 key: 'tableData',
                 type: 'ng-table',
                 templateOptions: {
                     tableParams: dc.tableParams,
-                    openDialog: function (row, ev) {
-                        /** open the created $uibModal */
-                        dc.openUibModal(row);
-                    },
                     cols: [
                         {
                             'field': 'name',
@@ -281,28 +240,40 @@
                                 return $sce.trustAsHtml(html);
                             }
                         }
-                        // ,
-                        // {
-                        //     'field': 'action',
-                        //     'title': 'Action',
-                        //     'getValue': function ($scope, row) {
-                        //         // var value = row[this.field];
-                        //         // var editBtn = '<div align="center"><button type="button" class="btn btn-default f-edit" ng-click="openDialog()" >' +
-                        //         //     '<span class="glyphicon glyphicon-edit" ></span></button></div>';
-                        //         // var res = $sce.trustAsHtml(editBtn);
-                        //         // return res;
-                        //         return "<input type='button' class='form-control input-sm' ng-model='row[col.field]' />";
-                        //     },
-                        //     'clickFunc':function () {
-                        //         alert('Hello');
-                        //     }
-                        // }
+                    ],
+                    editFormlFields: [
+                        {
+                            key: 'name',
+                            type: 'md-input',
+                            templateOptions: {
+                                label: 'Name',
+                                req: true,
+                                maxlength: 150
+                            }
+                        },
+                        {
+                            key: 'balance',
+                            type: 'md-input',
+                            templateOptions: {
+                                label: 'Balance',
+                                req: true,
+                                maxlength: 15
+                            }
+                        },
+                        {
+                            key: 'age',
+                            type: 'md-input',
+                            templateOptions: {
+                                label: 'Age',
+                                req: true,
+                                maxlength: 3
+                            }
+                        },
                     ]
                 }
             }
 
         ];
-
 
     }
 })();
