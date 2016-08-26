@@ -31,7 +31,9 @@
     "bootstrap-table": "^1.11.0",
     "ng-table": "^1.0.0",
     "angular-resource": "^1.5.8",
-    "angular-sanitize": "^1.5.8"
+    "angular-sanitize": "^1.5.8",
+    "tr-ng-grid": "^3.1.7",
+    "angular-bootstrap": "^2.1.2"
   },
   "overrides": {
     "bootstrap": {

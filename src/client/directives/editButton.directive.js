@@ -50,7 +50,8 @@
         function getTemplate(rowData) {
             var result = '<md-dialog layout-padding="">';
             for (var key in rowData) {
-                result += '<b>' + key + '</b><span>' + rowData[key] + "</span>";
+                if (rowData.hasOwnProperty(key))
+                    result += '<b>' + key + '</b><span>' + rowData[key] + "</span>";
             }
             result += '</md-dialog>';
             return result;

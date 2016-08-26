@@ -5,9 +5,45 @@
         .module('vanilla.demo')
         .controller('vanillaDemoController', vanillaDemoController);
 
-    vanillaDemoController.$inject = ['$log', '$q', '$timeout', '$resource', 'NgTableParams'];
-    function vanillaDemoController($log, $q, $timeout, $resource, NgTableParams) {
+    vanillaDemoController.$inject = ['$log', '$q', '$timeout', '$resource', '$uibModal', 'NgTableParams'];
+    function vanillaDemoController($log, $q, $timeout, $resource, $uibModal, NgTableParams) {
         var vdc = this;
+
+
+        /* Configuring a ui bootstrap modal pop-up to open when the page loads */
+        /** 1. setting the animation true for the modal*/
+        vdc.animatonsEnabled = true;
+        /** 2. some 'items' to be placed in the modal */
+        vdc.modalItems = ['item1', 'item2', 'item3'];
+        /** 3. setting the open function with 'size' as a param*/
+        vdc.openUibModal = function (size) {
+            var modalInstance = $uibModal.open({
+                /** setting the animation true */
+                animation: vdc.animatonsEnabled,
+                /** setting the templateUrl to an html template file */
+                templateUrl: 'templates/vdcPageLoadModalContent.html',
+                /** assign a controller to the modal pop-up, file: "vanillaDemoPageLoadModal.controller.js" */
+                controller: 'vanillaDemoPageLoadControllerController',
+                /** bind it to the controller objects */
+                controllerAs: 'mc',
+                /** setting the size of the modal pop-up */
+                size: size,
+                resolve: {
+                    items: function () {
+                        return vdc.modalItems;
+                    }
+                }
+            });
+
+            /** setting up the result function */
+            modalInstance.result.then(function (selectedItem) {
+                vdc.selectedItem = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
+
+        vdc.openUibModal();
 
         vdc.simulateQuery = false;
         vdc.isDisabled = false;
@@ -33,6 +69,14 @@
             });
 
         }
+
+        // /**column configuration of ng-table */
+        // vdc.tableCols = [{
+        //     field: "name",
+        //     title: "Name",
+        //     show: true,
+        //     getValue: htmlValue
+        // }];
 
         function newState(state) {
             alert("Sorry! You'll need to create a Constituion for " + state + " first!");
@@ -145,7 +189,7 @@
             return function (vegetable) {
                 // return the matching items from the array
                 return (vegetable._lowername.indexOf(lowercaseQuery) === 0) ||
-                vegetable._lowertype.indexOf(lowercaseQuery) === 0
+                    vegetable._lowertype.indexOf(lowercaseQuery) === 0
             }
         }
 

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="lib/md-chips-select/dist/md-chips-select.css" />
     <link rel="stylesheet" href="lib/bootstrap-table/src/bootstrap-table.css" />
     <link rel="stylesheet" href="lib/ng-table/dist/ng-table.css" />
+    <link rel="stylesheet" href="lib/tr-ng-grid/trNgGrid.css" />
     <!--endbower-->
     <!--bower:js-->
     <script src="lib/angular/angular.js"></script>
@@ -26,6 +27,8 @@
     <script src="lib/ng-table/dist/ng-table.js"></script>
     <script src="lib/angular-resource/angular-resource.js"></script>
     <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+    <script src="lib/tr-ng-grid/trNgGrid.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!--endbower-->
     <script src="directives/directives.app.js"></script>
     <script src="vanillaDemo/vanillaDemo.app.js"></script>
@@ -33,17 +36,36 @@
     <script src="main/main.app.js"></script>
     <script src="directives/navBar.directive.js"></script>
     <script src="directives/editButton.directive.js"></script>
+    <script src="directives/bindCompiledHtml.directive.js"></script>
     <script src="main/main.controller.js"></script>
     <script src="demo/demo.controller.js"></script>
+    <script src="demo/ngTableEditUibModal.controller.js"></script>
+    <script src="vanillaDemo/vanillaDemoPageLoadModal.controller.js"></script>
     <script src="vanillaDemo/vanillaDemo.controller.js"></script>
 </head>
 
 <body ng-controller="mainController as mc">
     <nav-bar></nav-bar>
-
     <div class="container-fluid">
         <ng-view></ng-view>
     </div>
 </body>
 
 </html>
+
+<!--<md-sidenav md-component-id="left" class="md-sidenav-left">
+        <md-toolbar>
+            <h1 class="md-toolbar-tools">Sidenav Left</h1>
+        </md-toolbar>
+        <md-content layout-padding="">
+            <md-button ng-click="close()" class="md-primary" hide-gt-md="">
+                Close Sidenav Left
+            </md-button>
+            <p hide="" show-gt-md="">
+                This sidenav is locked open on your device. To go back to the default behavior, narrow your display.
+            </p>
+        </md-content>
+    </md-sidenav>
+    <md-button ng-click="openLeftMenu()">
+        Open Left Menu
+    </md-button>-->

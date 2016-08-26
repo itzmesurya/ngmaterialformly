@@ -10,6 +10,8 @@
         'formly',
         'md.chips.select',
         'ngTable',
+        'ui.bootstrap',
+        'trNgGrid',
 
         /*Custom modules */
         'directives',
@@ -94,23 +96,87 @@
                     main-title="name">\
                     </md-chips-select>'
         });
-
+        /** NG-TABEL STUFF */
         //// ng-table controller 
-        var ngTableController = function ($scope, $compile) {
-            $scope.openDialog = function () {
-                // console.log(value);
-                alert('hiya!');
+        var ngTableController = function ($scope, $compile, $log, $uibModal) {
+
+            /** Setting up edit pop-up */
+            /** Create $uibModal for editing */
+            /* Configuring a ui bootstrap modal pop-up to open when the page loads */
+            /** 1. setting the animation true for the modal*/
+            $scope.animatonsEnabled = true;
+            /** 2. some 'items' to be placed in the modal */
+            $scope.modalItems = ['item1', 'item2', 'item3'];
+            /** 3. setting the open function with 'size' as a param*/
+            $scope.openUibModal = function (row, columns, event) {
+                var colDefs = [];
+                columns.forEach(function (column) {
+                    var title = column.title();
+                    colDefs.push({ title: title, field: column.field });
+                });
+
+                var resolveData = {
+                    rowData: row,
+                    columns: columns
+                }
+
+                var modalInstance = $uibModal.open({
+                    /** setting the animation true */
+                    animation: $scope.animatonsEnabled,
+                    /** setting the templateUrl to an html template file */
+                    templateUrl: 'templates/ng-table-edit-uibModal.html',
+                    /** assign a controller to the modal pop-up, file: "vanillaDemoPageLoadModal.controller.js" */
+                    controller: 'ngTableEditUibModalController',
+                    /** bind it to the controller objects */
+                    controllerAs: 'mc',
+                    resolve: {
+                        resolveData : resolveData
+                    }
+                });
+
+
+
+                /** setting up the result function */
+                modalInstance.result.then(function (rowData) {
+                    for (var key in row) {
+                        if (row.hasOwnProperty(key)) {
+                            row[key] = rowData[key];
+                        }
+                    }
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
             }
+
         }
-        ngTableController.$inject = ['$scope', '$compile'];
+        ngTableController.$inject = ['$scope', '$compile', '$log', '$uibModal'];
+
         formlyConfigProvider.setType({
             name: 'ng-table',
             templateUrl: 'templates/ng-table.html',
             link: function (scope, el, attr) {
-                // console.log(el.find('tbody')[0]);
+
             },
             controller: ngTableController
         });
+
+        // trNgGrid cnfiguration
+
+        /**setting up the controller */
+        var trNgGridController = function ($scope) {
+        }
+        trNgGridController.$inject = ['$scope'];
+
+        formlyConfigProvider.setType({
+            name: 'tr-ng-grid',
+            templateUrl: 'templates/tr-ng-grid.html',
+            link: function (scope, el, attr) {
+                console.log('link funnction of trNgGrid fired from formlyConfig');
+
+            },
+            controller: trNgGridController
+        });
+
     });
 
 })();

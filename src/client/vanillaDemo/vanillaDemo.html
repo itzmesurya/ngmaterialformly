@@ -1,6 +1,13 @@
 <div class="well well-sm">
     This page contains Angular Material demos without Angular-Formly
 </div>
+<button type="button" class="btn btn-default" ng-click="vdc.openUibModal('lg')">Open me!</button>
+</br>
+
+<div class="well well-sm">
+    <pre>You selected : {{vdc.selectedItem | uppercase}}</pre>
+</div>
+
 <md-tabs md-dynamic-height="" md-border-bottom="">
     <md-tab label="md-chips">
         <md-content class="md-padding">
@@ -61,7 +68,6 @@
                                 <td data-title="'Name'" filter="{name: 'text'}" sortable="'name'">{{row.name}}</td>
                                 <td data-title="'Age'" filter="{age: 'number'}" sortable="'age'">{{row.age}}</td>
                                 <td data-title="'Balance'" filter="{balance: 'number'}" sortable="'balance'">{{row.balance}}</td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>
