@@ -4,13 +4,15 @@
             "index": 0,
             "name": "Susanne Stone",
             "age": 30,
-            "balance": "$1,497.97"
+            "balance": "$1,497.97",
+            "tabModel":"dummyData/piggyBank.json"
         },
         {
             "index": 1,
             "name": "Mary Donovan",
             "age": 29,
-            "balance": "$2,607.26"
+            "balance": "$2,607.26",
+            "tabModel":"dummyData/piggyBank.json"
         },
         {
             "index": 2,

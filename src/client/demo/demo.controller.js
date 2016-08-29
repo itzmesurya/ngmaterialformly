@@ -150,57 +150,59 @@
         /** Modal functions end */
 
         dc.formFields = [
-            // {
-            //     key: 'title',
-            //     type: 'md-input',
-            //     templateOptions: {
-            //         label: 'Title',
-            //         req: true,
-            //         maxlength: 3
-            //     }
-            // },
-            // {
-            //     key: 'author',
-            //     type: 'md-input',
-            //     templateOptions: {
-            //         label: 'Author'
-            //     }
-            // },
-            // {
-            //     key: 'genre',
-            //     type: 'md-autocomplete',
-            //     templateOptions: {
-            //         label: 'Genre',
-            //         querySearch: dc.querySearch,
-            //         searchText: '',
-            //         placeHolder: 'What is Genre?'
-            //     }
-            // },
-            // {
-            //     key: 'read',
-            //     type: 'md-checkbox',
-            //     templateOptions: {
-            //         label: 'Read?',
-            //         class: 'md-primary',
-            //         onChange: function () {
-            //             $log.info('on change fired');
-            //         }
-            //     }
-            // },
-            // {
-            //     type: 'md-checkbox',
-            //     templateOptions: {
-            //         label: 'Simulate $q ?',
-            //         class: 'md-primary',
-            //         onChange: function () {
-            //             dc.simulateQuery = !dc.simulateQuery;
-            //         }
-            //     },
-            //     modelOptions: {
-            //         checked: true
-            //     }
-            // }
-            // ,
+           /**
+            {
+                key: 'title',
+                type: 'md-input',
+                templateOptions: {
+                    label: 'Title',
+                    req: true,
+                    maxlength: 3
+                }
+            },
+            {
+                key: 'author',
+                type: 'md-input',
+                templateOptions: {
+                    label: 'Author'
+                }
+            },
+            {
+                key: 'genre',
+                type: 'md-autocomplete',
+                templateOptions: {
+                    label: 'Genre',
+                    querySearch: dc.querySearch,
+                    searchText: '',
+                    placeHolder: 'What is Genre?'
+                }
+            },
+            {
+                key: 'read',
+                type: 'md-checkbox',
+                templateOptions: {
+                    label: 'Read?',
+                    class: 'md-primary',
+                    onChange: function () {
+                        $log.info('on change fired');
+                    }
+                }
+            },
+            {
+                type: 'md-checkbox',
+                templateOptions: {
+                    label: 'Simulate $q ?',
+                    class: 'md-primary',
+                    onChange: function () {
+                        dc.simulateQuery = !dc.simulateQuery;
+                    }
+                },
+                modelOptions: {
+                    checked: true
+                }
+            }
+            ,
+            */
             {
                 key: 'tableData',
                 type: 'ng-table',
@@ -242,7 +244,7 @@
                             }
                         }
                     ],
-                    editFormlFields: [
+                    editFormlyFields: [
                         {
                             key: 'name',
                             type: 'md-input',
@@ -269,9 +271,51 @@
                                 req: true,
                                 maxlength: 3
                             }
+                        }
+                    ],
+                    editFormlyFieldsForTabs: [
+                        /** Divide objects as tabs */
+                        {
+                            heading:"First Tab",
+                            fields: [{
+                                key: 'name',
+                                type: 'md-input',
+                                templateOptions: {
+                                    label: 'Name',
+                                    req: true,
+                                    maxlength: 150
+                                }
+                            },
+                                {
+                                    key: 'balance',
+                                    type: 'md-input',
+                                    templateOptions: {
+                                        label: 'Balance',
+                                        req: true,
+                                        maxlength: 15
+                                    }
+                                }]
                         },
+                        {
+                            heading:"Second Tab",
+                            fields: [
+                                {
+                                    key: 'age',
+                                    type: 'md-input',
+                                    templateOptions: {
+                                        label: 'Age',
+                                        req: true,
+                                        maxlength: 3
+                                    }
+                                }
+                            ]
+                        }
                     ]
                 }
+            },
+            {
+                key: 'trNgGridData',
+                type: 'bootstrap-tabset'
             }
 
         ];

@@ -2,12 +2,22 @@
     <h3 class="modal-title" id="modal-title" ng-bind="mc.dialogTitle"></h3>
 </div>
 <div class="modal-body">
-    <form ng-submit="mc.ok()" name="mc.form" novalidate>
+    <!--<form ng-submit="mc.ok()" name="mc.form" novalidate>
         <formly-form model="mc.model" fields="mc.fields">
             </br>
             <md-button type="submit" class="md-raised md-primary" ng-disabled="mc.form.$invalid">Submit</md-button>
             <md-button class="md-raised" type="button" ng-click="mc.cancel()">Cancel</md-button>
         </formly-form>
+    </form>-->
+    <form ng-submit="mc.ok()" name="mc.form" novalidate>
+        <uib-tabset active="active">
+            <uib-tab ng-repeat="tab in mc.tabData" heading="{{tab.heading}}">
+                <formly-form model="tab.model" fields="tab.fields" options="tab.options" form="tab.form">
+                    <md-button type="submit" class="md-raised md-primary" ng-disabled="mc.form.$invalid">Submit</md-button>
+                    <md-button class="md-raised" type="button" ng-click="mc.cancel()">Cancel</md-button>
+                </formly-form>
+            </uib-tab>
+        </uib-tabset>
     </form>
 </div>
 <div class="modal-footer">

@@ -122,7 +122,8 @@
                 var resolveData = {
                     rowData: row,
                     columns: columns,
-                    editFormlyFields: $scope.to.editFormlFields,
+                    editFormlyFields: $scope.to.editFormlyFields,
+                    editFormlyFieldsForTabs: $scope.to.editFormlyFieldsForTabs,
                     dialogTitle: dialogTitle
                 }
 
@@ -204,6 +205,23 @@
 
             },
             controller: trNgGridController
+        });
+
+        /** bootstrap tab strip template */
+        function bootStrapTabSetController($scope, $log) {
+            $log.info('bootStrapTabSet-controller loaded');
+            $scope.selectCallBack = function () {
+                $log.info('selectCallBack function for bootstrap tabset called');
+            }
+        }
+        bootStrapTabSetController.$inject = ['$scope', '$log'];
+        formlyConfigProvider.setType({
+            name: 'bootstrap-tabset',
+            templateUrl: 'templates/bootstrap-tabset.html',
+            link: function (scope, el, attr) {
+                console.log('bootStrapTabSet-link function called');
+            },
+            controller: bootStrapTabSetController
         });
 
     });

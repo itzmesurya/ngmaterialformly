@@ -1,0 +1,6 @@
+<uib-tabset active="active">
+    <uib-tab ng-repeat="tab in to.tabs" index="{{tab.index}}" heading="{{tab.heading}}">
+        <formly-form model="tab.model" fields="tab.fields" options="tab.options" form="tab.form">
+        </formly-form>
+    </uib-tab>
+</uib-tabset>
