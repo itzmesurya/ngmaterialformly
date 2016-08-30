@@ -60,13 +60,10 @@
                 )
             });
         }
-        console.log(mic.tabData);
         /**!!!TODO!!!: Now that the TabData is ready, we need to create a field on the modal
          * using the bootstrap-tabset template of the formly, but as of now, we are going to 
          * place the bootstrap tab ui on the modal and try!!
          */
-
-
         mic.ok = function () {
             /** loop thru tabData to get the model back */
             mic.tabData.forEach(function (tabObj) {
