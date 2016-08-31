@@ -224,6 +224,56 @@
             controller: bootStrapTabSetController
         });
 
+        /** bootstrap tabset with resource calls */
+        function bootStrapTabsController($scope, $http) {
+            /** initialise a tabs array */
+            $scope.tabs = [];
+            /** set all the tab objects 
+             * a. model
+             * b. fields
+             * c. options
+             * d. form
+            */
+            for (var index = 0; index < $scope.to.tabUrls.length; index++) {
+                /** Creating a tabObj and pushing it into array */
+                $scope.tabs.push({
+                    url: $scope.to.tabUrls[index],
+                    tabName: $scope.model[$scope.options.key][index],
+                    heading: $scope.model[$scope.options.key][index],
+                    index: index
+                });
+            }
+            /** Get the data of the first tab */
+            $http.get($scope.tabs[0].url).then(function (response) {
+                console.log(response.data);
+                $scope.tabs[0].model = response.data.model;
+                $scope.tabs[0].fields = response.data.fields;
+            }, function (response) {
+                console.log('Error: ' + response.data);
+            });
+
+            /** Setting up the select function */
+            $scope.select = function ($event, tab) {
+                /** get the data for the current tab */
+                $http.get(tab.url).then(function (response) {
+                    tab.model = response.data.model;
+                    tab.fields = response.data.fields;
+                    console.log('tab data fetched: ');
+                    console.log(tab);
+                }, function (response) {
+                    console.log('Error: ' + response.data);
+                });
+            }
+        }
+        bootStrapTabsController.$inject = ['$scope', '$http'];
+        formlyConfigProvider.setType({
+            name: 'bootstrap-tabs',
+            templateUrl: 'templates/bootstrap-tabs.html',
+            link: function (scope, el, attr) {
+            },
+            controller: bootStrapTabsController
+        });
+
     });
 
 })();

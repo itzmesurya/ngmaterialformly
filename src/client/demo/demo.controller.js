@@ -41,6 +41,7 @@
             "genre": "Romedy",
             "read": true,
             "tableData": dc.tableParams,
+            "tabData": ["First Tab", "Second Tab"],
             "trNgGridData": '',
             "cars": [
                 {
@@ -150,7 +151,7 @@
         /** Modal functions end */
 
         dc.formFields = [
-           /**
+
             {
                 key: 'title',
                 type: 'md-input',
@@ -200,9 +201,7 @@
                 modelOptions: {
                     checked: true
                 }
-            }
-            ,
-            */
+            },
             {
                 key: 'tableData',
                 type: 'ng-table',
@@ -276,7 +275,7 @@
                     editFormlyFieldsForTabs: [
                         /** Divide objects as tabs */
                         {
-                            heading:"First Tab",
+                            heading: "First Tab",
                             fields: [{
                                 key: 'name',
                                 type: 'md-input',
@@ -297,7 +296,7 @@
                                 }]
                         },
                         {
-                            heading:"Second Tab",
+                            heading: "Second Tab",
                             fields: [
                                 {
                                     key: 'age',
@@ -316,8 +315,17 @@
             {
                 key: 'trNgGridData',
                 type: 'bootstrap-tabset'
+            },
+            {
+                key: 'tabData',
+                type: 'bootstrap-tabs',
+                templateOptions: {
+                    tabUrls: [
+                        'dummyData/tab1.json',
+                        'dummyData/tab2.json'
+                    ]
+                }
             }
-
         ];
 
     }
