@@ -151,7 +151,6 @@
         /** Modal functions end */
 
         dc.formFields = [
-
             {
                 key: 'title',
                 type: 'md-input',
@@ -325,6 +324,15 @@
                         'dummyData/tab2.json'
                     ]
                 }
+            },
+            {
+                type: 'bootstrap-tabstrip',
+                templateOptions: {
+                    tabs: [
+                        { heading: 'First Tab', formName: 'tab1.json' },
+                        { heading: 'Second Tab', formName: 'tab2.json' }
+                    ]
+                }
             }
         ];
 
@@ -365,6 +373,8 @@
 
 
 /** trNgGrid code */
+
+
                            // ,
             // {
             //     key: 'trNgGridData',
