@@ -9,6 +9,8 @@
     demoController.$inject = ['$scope', '$log', '$q', '$timeout', '$resource', '$sce', '$compile', '$mdDialog', '$uibModal', 'NgTableParams'];
     function demoController($scope, $log, $q, $timeout, $resource, $sce, $compile, $mdDialog, $uibModal, NgTableParams) {
         $scope.name = 'demoController';
+        alert('Demo controller has been loaded!');
+
         activate();
         var dc = this;
         dc.title = 'awesome title';
@@ -324,6 +326,10 @@
                         'dummyData/tab2.json'
                     ]
                 }
+            },
+            {
+                template: '<div class="well well-sm"><strong>Below is tabstrip template where the title has been created using' +
+                ' : <code>uib-tab-heading</code> element inside the <code>ui-tab</code> element</strong></div>'
             },
             {
                 type: 'bootstrap-tabstrip',

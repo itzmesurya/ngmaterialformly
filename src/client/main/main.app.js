@@ -286,37 +286,19 @@
              * c. options
              * d. form
             */
-            // for (var index = 0; index < $scope.to.tabs.length; index++) {
-            //     /** Creating a tabObj and pushing it into array */
-            //     $scope.tabs.push({
-            //         url: $scope.to.tabUrls[index],
-            //         tabName: $scope.model[$scope.options.key][index],
-            //         heading: $scope.model[$scope.options.key][index],
-            //         index: index
-            //     });
-            // }
 
             /** initiate tab index */
-            // var index = 0;
+            var index = 0;
 
-            // $scope.to.tabs.forEach(function (tab) {
-            //     $scope.tabs.push({
-            //         heading: tab.heading,
-            //         formName: tab.formName,
-            //         index: angular.copy(index)
-            //     });
-            //     /** increment the index */
-            //     index++;
-            // });
-
-            for (var index = 0; index < $scope.to.tabs.length; index++) {
-                /** Creating a tabObj and pushing it into array */
-                 $scope.tabs.push({
-                    heading: $scope.to.tabs[index].heading,
-                    formName: $scope.to.tabs[index].formName,
+            $scope.to.tabs.forEach(function (tab) {
+                $scope.tabs.push({
+                    heading: tab.heading,
+                    formName: tab.formName,
                     index: index
                 });
-            }
+                /** increment the index */
+                index++;
+            });
 
             /** Get the data of the first tab */
             $http.get('dummyData/' + $scope.tabs[0].formName).then(function (response) {
@@ -340,7 +322,9 @@
                 });
             }
         }
+
         bootStrapTabStripController.$inject = ['$scope', '$http'];
+
         formlyConfigProvider.setType({
             name: 'bootstrap-tabstrip',
             templateUrl: 'templates/bootstrap-tabstrip.html',

@@ -1,6 +1,9 @@
 </br>
 <uib-tabset active="active">
-    <uib-tab ng-repeat="tab in tabs" index="tab.index" select="select($event,tab)" heading="{{tab.heading}}">
+    <uib-tab ng-repeat="tab in tabs" index="tab.index" select="select($event,tab)">
+        <uib-tab-heading>
+            <b>{{tab.heading}}</b>&nbsp;&nbsp;<span class="badge" ng-bind="tab.index"></span>
+        </uib-tab-heading>
         </br>
         <formly-form model="tab.model" fields="tab.fields" options="tab.options" form="tab.form">
         </formly-form>
